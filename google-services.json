@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "824902831407",
+    "firebase_url": "https://kotlinchat-a96cc.firebaseio.com",
+    "project_id": "kotlinchat-a96cc",
+    "storage_bucket": "kotlinchat-a96cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824902831407:android:16e4366e789b182cf725da",
+        "android_client_info": {
+          "package_name": "ru.nickb.chatktln"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824902831407-mlvqq3dvsb992dbqpib3vrtq1rmjnvta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEpMGGGeSwBHIyCoMYKeR6iSuN8NoE2Xo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824902831407-mlvqq3dvsb992dbqpib3vrtq1rmjnvta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
