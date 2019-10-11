@@ -15,4 +15,8 @@ class Register @Inject constructor(private val repository: AccountRepository): U
 
 
     data class Params(val email: String, val name: String, val password: String)
+
+
 }
+
+
