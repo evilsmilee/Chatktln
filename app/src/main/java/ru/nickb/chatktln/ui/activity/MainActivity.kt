@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val accountRepository: AccountRepository = AccountRepositoryImpl(accountRemote, accountCache)
 
         val register = Register(accountRepository)
-        register(Register.Params(email = "abcd@m.com", password =  "abcd", name = "123")) {
+        register(Register.Params(email = "abbb@m.com", password =  "abbbcd", name = "123")) {
             it.either({
                 Toast.makeText(this, it.javaClass.simpleName, Toast.LENGTH_SHORT).show()
             }, {
