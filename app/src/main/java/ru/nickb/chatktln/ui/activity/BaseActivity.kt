@@ -1,12 +1,21 @@
 package ru.nickb.chatktln.ui.activity
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.OneShotPreDrawListener.add
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.toolbar.*
 import ru.nickb.chatktln.R
 import ru.nickb.chatktln.domain.type.Exception.Failure
+import ru.nickb.chatktln.ui.fragment.BaseFragment
 import javax.inject.Inject
 
 abstract class BaseActivity: AppCompatActivity() {
@@ -20,7 +29,7 @@ abstract class BaseActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_layout)
 
-        setSupportActionBar(tolbar)
+        setSupportActionBar(toolbar)
         addFragment(savedInstanceState)
     }
 
@@ -45,10 +54,36 @@ abstract class BaseActivity: AppCompatActivity() {
         toolbar_progress_bar.visibility = viewStatus
     }
 
+    fun hideSoftKeyboard() {
+        if (currentFocus != null) {
+            val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        }
+    }
+
+
     fun handleFailure(failure: Failure?) {
         hideProgress()
         when(failure) {
             is Failure.NetworkConnectionError -> showMessage(getString(R.string.error_network))
         }
     }
+
+    fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    inline fun <reified T: ViewModel> viewModel(body: T. () -> Unit): T {
+        val vm  = ViewModelProviders.of(this, viewModelFactory)[T::class.java]
+        vm.body()
+        return vm
+    }
+
+}
+
+inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) =
+    beginTransaction().func().commit()
+
+inline fun Activity?.base(block: BaseActivity.() -> Unit) {
+    (this as? BaseActivity)?.let(block)
 }

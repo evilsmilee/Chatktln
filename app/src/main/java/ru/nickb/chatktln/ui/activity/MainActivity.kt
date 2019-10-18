@@ -15,7 +15,7 @@ import ru.nickb.chatktln.remote.core.NetworkHandler
 import ru.nickb.chatktln.remote.core.Request
 import ru.nickb.chatktln.remote.service.ServiceFactory
 
-class MainActivity : AppCompatActivity() {
+/*class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,4 +37,4 @@ class MainActivity : AppCompatActivity() {
             })
         }
     }
-}
+}*/
