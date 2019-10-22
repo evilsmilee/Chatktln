@@ -2,7 +2,7 @@ package ru.nickb.chatktln.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.nickb.chatktln.domain.type.Exception.Failure
+import ru.nickb.chatktln.domain.type.Failure
 import ru.nickb.chatktln.domain.type.HandleOnce
 
 abstract class BaseViewModel: ViewModel() {

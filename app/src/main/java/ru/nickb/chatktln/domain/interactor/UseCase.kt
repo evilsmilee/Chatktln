@@ -2,7 +2,7 @@ package ru.nickb.chatktln.domain.interactor
 
 import kotlinx.coroutines.*
 import ru.nickb.chatktln.domain.type.Either
-import ru.nickb.chatktln.domain.type.Exception.Failure
+import ru.nickb.chatktln.domain.type.Failure
 import kotlin.coroutines.CoroutineContext
 
 

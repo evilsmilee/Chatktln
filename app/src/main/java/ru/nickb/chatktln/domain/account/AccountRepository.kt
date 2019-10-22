@@ -1,7 +1,7 @@
 package ru.nickb.chatktln.domain.account
 
 import ru.nickb.chatktln.domain.type.Either
-import ru.nickb.chatktln.domain.type.Exception.Failure
+import ru.nickb.chatktln.domain.type.Failure
 import ru.nickb.chatktln.domain.type.None
 
 interface AccountRepository {
@@ -13,7 +13,7 @@ interface AccountRepository {
     fun getCurrentAccount(): Either<Failure, AccountEntity>
 
     fun updateAccountToken(token: String): Either<Failure, None>
-    fun upateAccountLastSeen(): Either<Failure, None>
+    fun updateAccountLastSeen(): Either<Failure, None>
 
     fun editAccount(entity: AccountEntity): Either<Failure, AccountEntity>
 }

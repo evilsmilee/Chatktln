@@ -1,4 +1,4 @@
-package ru.nickb.chatktln.ui.activity
+package ru.nickb.chatktln.ui.core
 
 import android.app.Activity
 import android.content.Context
@@ -14,8 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.toolbar.*
 import ru.nickb.chatktln.R
-import ru.nickb.chatktln.domain.type.Exception.Failure
-import ru.nickb.chatktln.ui.fragment.BaseFragment
+import ru.nickb.chatktln.domain.type.Failure
+import ru.nickb.chatktln.ui.core.navigation.Navigator
 import javax.inject.Inject
 
 abstract class BaseActivity: AppCompatActivity() {
@@ -24,6 +24,11 @@ abstract class BaseActivity: AppCompatActivity() {
 
     @Inject
     lateinit var  viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var navigator: Navigator
+
+    open val contentId = R.layout.activity_layout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +71,10 @@ abstract class BaseActivity: AppCompatActivity() {
         hideProgress()
         when(failure) {
             is Failure.NetworkConnectionError -> showMessage(getString(R.string.error_network))
+            is Failure.ServerError -> showMessage(getString(R.string.error_server))
+            is Failure.EmailAlreadyExistError -> showMessage(getString(R.string.error_email_already_exist))
+            is Failure.AuthError -> showMessage(getString(R.string.error_auth))
+            is Failure.TokenError -> navigator.showLogin(this)
         }
     }
 

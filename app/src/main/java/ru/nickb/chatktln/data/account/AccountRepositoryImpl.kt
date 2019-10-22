@@ -1,21 +1,22 @@
-package ru.nickb.chatktln.data.Account
+package ru.nickb.chatktln.data.account
 
 import ru.nickb.chatktln.domain.account.AccountEntity
 import ru.nickb.chatktln.domain.account.AccountRepository
-import ru.nickb.chatktln.domain.type.Either
-import ru.nickb.chatktln.domain.type.Exception.Failure
-import ru.nickb.chatktln.domain.type.None
-import ru.nickb.chatktln.domain.type.flatMap
+import ru.nickb.chatktln.domain.type.*
 import java.util.*
 
 class AccountRepositoryImpl(private val accountRemote: AccountRemote, private val accountCache: AccountCache): AccountRepository {
 
     override fun login(email: String, password: String): Either<Failure, AccountEntity> {
-        throw UnsupportedOperationException("Login is not supported")
+        return accountCache.getToken().flatMap {
+            accountRemote.login(email, password, it)
+        }.onNext {
+            accountCache.saveAccount(it)
+        }
     }
 
     override fun logout(): Either<Failure, None> {
-        throw UnsupportedOperationException("Logout is not supported")
+        return accountCache.logout()
     }
 
     override fun register(email: String, name: String, password: String): Either<Failure, None> {
@@ -33,10 +34,12 @@ class AccountRepositoryImpl(private val accountRemote: AccountRemote, private va
     }
 
     override fun updateAccountToken(token: String): Either<Failure, None> {
-        return accountCache.saveToken(token)
+       accountCache.saveToken(token)
+        return accountCache.getCurrentAccount()
+            .flatMap { accountRemote.updateToken(it.id, token, it.token) }
     }
 
-    override fun upateAccountLastSeen(): Either<Failure, None> {
+    override fun updateAccountLastSeen(): Either<Failure, None> {
         throw UnsupportedOperationException("Updating last seen is not supported")
     }
 

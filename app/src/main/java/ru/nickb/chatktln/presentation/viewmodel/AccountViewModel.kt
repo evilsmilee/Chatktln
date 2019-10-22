@@ -1,13 +1,21 @@
 package ru.nickb.chatktln.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import ru.nickb.chatktln.domain.account.Register
+import ru.nickb.chatktln.domain.account.*
+import ru.nickb.chatktln.domain.interactor.UseCase
 import ru.nickb.chatktln.domain.type.None
 import javax.inject.Inject
 
-class AccountViewModel @Inject constructor(val registerUseCase: Register): BaseViewModel() {
+class AccountViewModel @Inject constructor(
+    val registerUseCase: Register,
+    val loginUseCace: Login,
+    val getAccountUseCase: GetAccount,
+    val logoutUseCase: Logout
+): BaseViewModel() {
 
     var registerData: MutableLiveData<None> = MutableLiveData()
+    var accountData: MutableLiveData<AccountEntity> = MutableLiveData()
+    var logoutData: MutableLiveData<None> = MutableLiveData()
 
     fun register(email: String, name: String, password: String) {
         registerUseCase(Register.Params(email, name, password)) {
@@ -15,12 +23,37 @@ class AccountViewModel @Inject constructor(val registerUseCase: Register): BaseV
         }
     }
 
+    fun login(email: String, password: String) {
+        loginUseCace(Login.Params(email, password)) {
+            it.either(::handleFailure, ::handleAccount)
+        }
+    }
+
+    fun getAccount() {
+        getAccountUseCase(None()) {it.either(::handleFailure, ::handleAccount)}
+    }
+
+    fun logout() {
+        logoutUseCase(None()) {it.either(::handleFailure, ::handleLogout)}
+    }
+
     private fun handleRegister(none: None) {
         this.registerData.value = none
+    }
+
+    private fun handleAccount(account: AccountEntity) {
+        this.accountData.value = account
+    }
+
+    private fun handleLogout(none: None) {
+        this.logoutData.value = none
     }
 
     override fun onCleared() {
         super.onCleared()
         registerUseCase.unsubscribe()
+        loginUseCace.unsubscribe()
+        getAccountUseCase.unsubscribe()
+        logoutUseCase.unsubscribe()
     }
 }

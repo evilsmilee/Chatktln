@@ -1,4 +1,4 @@
-package ru.nickb.chatktln.ui.service
+package ru.nickb.chatktln.ui.firebase
 
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService

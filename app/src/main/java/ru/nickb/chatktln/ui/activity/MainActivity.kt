@@ -1,20 +1,5 @@
 package ru.nickb.chatktln.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.content.Context
-import android.os.Bundle
-import android.widget.Toast
-import ru.nickb.chatktln.R
-import ru.nickb.chatktln.cache.AccountCacheImpl
-import ru.nickb.chatktln.cache.SharedPrefsManager
-import ru.nickb.chatktln.data.Account.AccountRepositoryImpl
-import ru.nickb.chatktln.domain.account.AccountRepository
-import ru.nickb.chatktln.domain.account.Register
-import ru.nickb.chatktln.remote.account.AccountRemoteImpl
-import ru.nickb.chatktln.remote.core.NetworkHandler
-import ru.nickb.chatktln.remote.core.Request
-import ru.nickb.chatktln.remote.service.ServiceFactory
-
 /*class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

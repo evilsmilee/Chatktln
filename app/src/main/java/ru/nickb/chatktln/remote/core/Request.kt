@@ -4,7 +4,7 @@ package ru.nickb.chatktln.remote.core
 import retrofit2.Call
 import retrofit2.Response
 import ru.nickb.chatktln.domain.type.Either
-import ru.nickb.chatktln.domain.type.Exception.Failure
+import ru.nickb.chatktln.domain.type.Failure
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -38,6 +38,8 @@ class Request @Inject constructor(private val networkHandler: NetworkHandler) {
         val message = (body() as BaseResponse).message
         return when(message) {
             "email already exists" -> Failure.EmailAlreadyExistError
+            "error in email or password" -> Failure.AuthError
+            "Token is invalid" -> Failure.TokenError
             else -> Failure.ServerError
         }
     }

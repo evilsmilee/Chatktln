@@ -1,10 +1,9 @@
 package ru.nickb.chatktln.injection
 
-import android.app.DownloadManager
 import dagger.Module
 import dagger.Provides
 import ru.nickb.chatktln.BuildConfig
-import ru.nickb.chatktln.data.Account.AccountRemote
+import ru.nickb.chatktln.data.account.AccountRemote
 import ru.nickb.chatktln.remote.account.AccountRemoteImpl
 import ru.nickb.chatktln.remote.core.Request
 import ru.nickb.chatktln.remote.service.ApiService

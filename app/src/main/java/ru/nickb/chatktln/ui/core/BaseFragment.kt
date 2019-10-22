@@ -1,4 +1,4 @@
-package ru.nickb.chatktln.ui.fragment
+package ru.nickb.chatktln.ui.core
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import ru.nickb.chatktln.R
-import ru.nickb.chatktln.domain.type.Exception.Failure
-import ru.nickb.chatktln.ui.activity.BaseActivity
-import ru.nickb.chatktln.ui.activity.base
+import ru.nickb.chatktln.domain.type.Failure
+import ru.nickb.chatktln.ui.core.navigation.Navigator
 import javax.inject.Inject
 
 abstract class BaseFragment: Fragment() {
@@ -20,6 +19,9 @@ abstract class BaseFragment: Fragment() {
 
     open val titleToolbar = R.string.app_name
     open val showToolbar = true
+
+    @Inject
+    lateinit var navigator: Navigator
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
