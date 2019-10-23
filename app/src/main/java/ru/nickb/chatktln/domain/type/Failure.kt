@@ -1,5 +1,7 @@
 package ru.nickb.chatktln.domain.type
 
+//Класс маркер. Передача маркеров об ошибке.
+
 sealed class Failure {
 
     object NetworkConnectionError: Failure()
@@ -10,4 +12,8 @@ sealed class Failure {
     object EmailAlreadyExistError: Failure()
 
     object NoSavedAccountsError: Failure()
+
+    object AlreadyFriendError: Failure()
+    object AlreadyRequestedFriendError: Failure()
+    object ContactNotFoundError: Failure()
 }

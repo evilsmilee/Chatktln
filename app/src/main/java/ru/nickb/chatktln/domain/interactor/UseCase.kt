@@ -5,6 +5,11 @@ import ru.nickb.chatktln.domain.type.Either
 import ru.nickb.chatktln.domain.type.Failure
 import kotlin.coroutines.CoroutineContext
 
+/**
+    * Абстрактный параметаризированный класс. Оперирует двумя параметризированными типами.
+    *Type тип возвращаемого объекта с данными. Params тип класса оболочки хранязей параметры для выполнения функции.
+ *
+ */
 
 /**
  * Abstract class for a Use Case (Interactor in terms of Clean Architecture).

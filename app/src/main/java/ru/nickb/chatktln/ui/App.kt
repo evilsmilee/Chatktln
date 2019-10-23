@@ -46,6 +46,8 @@ interface  AppComponent {
     fun inject(fragment: RegisterFragment)
     fun inject(fragment: LoginFragment)
     fun inject(fragment: ChatsFragment)
+    fun inject(fragment: FriendsFragment)
+    fun inject(fragment: FriendRequestFragment)
 
     //services
     fun inject(service: FirebaseService)

@@ -1,5 +1,8 @@
 package ru.nickb.chatktln.domain.type
 
+//Параметаризированный класс обертка. Для передачи одного из двух возможных типов данных неизвестного в момент компиляции, но известнного в момент выполнения.
+//Функции высшего порядка
+
 /**
  * Represents a value of one of two possible types (a disjoint union).
  * Instances of [Either] are either an instance of [Left] or [Right].
