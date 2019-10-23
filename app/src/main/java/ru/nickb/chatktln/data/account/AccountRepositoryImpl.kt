@@ -30,7 +30,7 @@ class AccountRepositoryImpl(private val accountRemote: AccountRemote, private va
     }
 
     override fun getCurrentAccount(): Either<Failure, AccountEntity> {
-        throw UnsupportedOperationException("Get account is not supported")
+        return accountCache.getCurrentAccount()
     }
 
     override fun updateAccountToken(token: String): Either<Failure, None> {

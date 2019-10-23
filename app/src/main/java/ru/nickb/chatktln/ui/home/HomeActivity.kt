@@ -3,6 +3,7 @@ package ru.nickb.chatktln.ui.home
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.activity_navigation.*
 import kotlinx.android.synthetic.main.navigation.*
 import ru.nickb.chatktln.R
@@ -22,9 +23,9 @@ class HomeActivity: BaseActivity() {
 
     private lateinit var accountViewModel: AccountViewModel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         App.appComponent.inject(this)
 
         accountViewModel = viewModel {
@@ -38,9 +39,10 @@ class HomeActivity: BaseActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.menu)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        btnLogout.setOnClickListener {
-            accountViewModel.logout()
-        }
+      btnExit.setOnClickListener {
+          accountViewModel.logout()
+      }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -79,4 +81,6 @@ class HomeActivity: BaseActivity() {
             super.onBackPressed()
         }
     }
+
+
 }
