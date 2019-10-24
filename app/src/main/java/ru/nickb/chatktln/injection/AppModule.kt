@@ -8,8 +8,10 @@ import ru.nickb.chatktln.data.account.AccountRemote
 import ru.nickb.chatktln.data.account.AccountRepositoryImpl
 import ru.nickb.chatktln.data.friends.FriendsRemote
 import ru.nickb.chatktln.data.friends.FriendsRepositoryImpl
+import ru.nickb.chatktln.data.media.MediaRepositoryImpl
 import ru.nickb.chatktln.domain.account.AccountRepository
 import ru.nickb.chatktln.domain.friends.FriendsRepository
+import ru.nickb.chatktln.domain.media.MediaRepository
 import javax.inject.Singleton
 
 @Module
@@ -29,5 +31,11 @@ class AppModule(private val context: Context) {
     @Singleton
     fun provideFriendsRepository(remote: FriendsRemote, cache: AccountCache): FriendsRepository {
         return FriendsRepositoryImpl(cache, remote)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMediaRepository(context: Context): MediaRepository {
+        return MediaRepositoryImpl(context)
     }
 }
