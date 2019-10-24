@@ -74,7 +74,7 @@ abstract class BaseActivity: AppCompatActivity() {
     }
 
 
-    fun handleFailure(failure: Failure?) {
+  open  fun handleFailure(failure: Failure?) {
         hideProgress()
         when(failure) {
             is Failure.NetworkConnectionError -> showMessage(getString(R.string.error_network))

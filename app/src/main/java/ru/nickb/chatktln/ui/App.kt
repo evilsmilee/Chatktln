@@ -10,6 +10,8 @@ import ru.nickb.chatktln.ui.core.navigation.RouteActivity
 import ru.nickb.chatktln.ui.register.RegisterActivity
 import ru.nickb.chatktln.ui.register.RegisterFragment
 import ru.nickb.chatktln.ui.firebase.FirebaseService
+import ru.nickb.chatktln.ui.friends.FriendRequestFragment
+import ru.nickb.chatktln.ui.friends.FriendsFragment
 import ru.nickb.chatktln.ui.home.ChatsFragment
 import ru.nickb.chatktln.ui.home.HomeActivity
 import ru.nickb.chatktln.ui.login.LoginFragment

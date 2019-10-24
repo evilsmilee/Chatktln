@@ -1,8 +1,9 @@
 package ru.nickb.chatktln.ui.login
 
 import ru.nickb.chatktln.ui.core.BaseActivity
+import ru.nickb.chatktln.ui.core.BaseFragment
 
 class LoginActivity: BaseActivity() {
 
-    override val fragment = LoginFragment()
+    override var fragment: BaseFragment = LoginFragment()
 }
