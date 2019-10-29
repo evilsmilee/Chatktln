@@ -47,6 +47,11 @@ class FriendRequestFragment : BaseListFragment() {
                         showProgress()
                         friendsViewModel.cancelFriend(it)
                     }
+                    else -> {
+                        activity?.let { act ->
+                            navigator.showUser(act, it)
+                        }
+                    }
                 }
             }
         }

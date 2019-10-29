@@ -1,6 +1,8 @@
 package ru.nickb.chatktln.ui.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
@@ -20,6 +22,7 @@ import ru.nickb.chatktln.ui.core.BaseActivity
 import ru.nickb.chatktln.ui.core.BaseFragment
 import ru.nickb.chatktln.ui.core.ext.onFailure
 import ru.nickb.chatktln.ui.core.ext.onSuccess
+import ru.nickb.chatktln.ui.firebase.NotificationHelper
 import ru.nickb.chatktln.ui.friends.FriendRequestFragment
 import ru.nickb.chatktln.ui.friends.FriendsFragment
 import javax.inject.Inject
@@ -55,10 +58,21 @@ class HomeActivity: BaseActivity() {
             onFailure(failureData, ::handleFailure)
         }
 
-        accountViewModel.getAccount()
+        /*accountViewModel.getAccount()*/
 
         supportActionBar?.setHomeAsUpIndicator(R.drawable.menu)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        supportFragmentManager.beginTransaction().replace(R.id.requestContainer, FriendRequestFragment()).commit()
+
+        val type: String? = intent.getStringExtra("type")
+        when(type) {
+            NotificationHelper.TYPE_ADD_FRIEND -> {
+                openDrawer()
+                friendsViewModel.getFriendRequests()
+                requestContainer.visibility = View.VISIBLE
+            }
+        }
 
       btnLogout.setOnClickListener {
           accountViewModel.logout()
@@ -88,7 +102,7 @@ class HomeActivity: BaseActivity() {
           closeDrawer()
       }
 
-      supportFragmentManager.beginTransaction().replace(R.id.requestContainer, FriendRequestFragment()).commit()
+
 
       btnRequests.setOnClickListener{
           friendsViewModel.getFriendRequests()
@@ -99,6 +113,13 @@ class HomeActivity: BaseActivity() {
               requestContainer.visibility = View.VISIBLE
           }
       }
+
+        profileContainer.setOnClickListener {
+            navigator.showAccount(this)
+            Handler(Looper.getMainLooper()).postDelayed({
+                closeDrawer()
+            }, 200)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -113,6 +134,11 @@ class HomeActivity: BaseActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        accountViewModel.getAccount()
     }
 
     private fun openDrawer() {

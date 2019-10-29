@@ -10,6 +10,7 @@ abstract class BaseViewModel: ViewModel() {
     val failureData: MutableLiveData<HandleOnce<Failure>> = MutableLiveData()
     val progressData: MutableLiveData<Boolean> = MutableLiveData()
 
+
     protected fun handleFailure(failure: Failure) {
         this.failureData.value = HandleOnce(failure)
     }

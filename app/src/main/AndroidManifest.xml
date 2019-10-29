@@ -30,9 +30,14 @@
         <!--Register-->
         <activity android:name=".ui.register.RegisterActivity"/>
 
+        <!--User-->
+        <activity android:name=".ui.user.UserActivity"/>
+
         <!--Home-->
         <activity android:name=".ui.home.HomeActivity"/>
 
+        <!--Account-->
+        <activity android:name=".ui.account.AccountActivity"/>
 
         <!--SERVICES-->
         <!--Firebase-->

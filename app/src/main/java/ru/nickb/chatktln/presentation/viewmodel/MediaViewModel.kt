@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
-import ru.nickb.chatktln.domain.interactor.UseCase
 import ru.nickb.chatktln.domain.media.CreateImageFile
 import ru.nickb.chatktln.domain.media.EncodeImageBitmap
 import ru.nickb.chatktln.domain.media.GetPickedImage
@@ -37,7 +36,7 @@ class MediaViewModel @Inject constructor(
         updateProgress(true)
         getPickedImageUseCase(uri) { it.either(::handleFailure, ::handleImageBitmap)}
     }
-    
+
     private fun encodeImage(bitmap: Bitmap) {
         encodeImageBitmapUseCase(bitmap) { it.either(::handleFailure, ::handleImageString)}
     }

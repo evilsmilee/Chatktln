@@ -2,10 +2,13 @@ package ru.nickb.chatktln.ui
 
 import android.app.Application
 import dagger.Component
+import ru.nickb.chatktln.domain.account.AccountEntity
 import ru.nickb.chatktln.injection.AppModule
 import ru.nickb.chatktln.injection.CacheModule
 import ru.nickb.chatktln.injection.RemoteModule
 import ru.nickb.chatktln.injection.ViewModelModule
+import ru.nickb.chatktln.ui.account.AccountActivity
+import ru.nickb.chatktln.ui.account.AccountFragment
 import ru.nickb.chatktln.ui.core.navigation.RouteActivity
 import ru.nickb.chatktln.ui.register.RegisterActivity
 import ru.nickb.chatktln.ui.register.RegisterFragment
@@ -43,6 +46,8 @@ interface  AppComponent {
     fun inject(activity: RegisterActivity)
     fun inject(activity: HomeActivity)
     fun inject(activity: RouteActivity)
+    /*fun inject(activity: AccountEntity)*/
+    fun inject(activity: AccountActivity)
 
     //fragments
     fun inject(fragment: RegisterFragment)
@@ -50,6 +55,7 @@ interface  AppComponent {
     fun inject(fragment: ChatsFragment)
     fun inject(fragment: FriendsFragment)
     fun inject(fragment: FriendRequestFragment)
+    fun inject(fragment: AccountFragment)
 
     //services
     fun inject(service: FirebaseService)

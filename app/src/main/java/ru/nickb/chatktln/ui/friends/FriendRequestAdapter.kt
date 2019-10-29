@@ -5,6 +5,7 @@ import kotlinx.android.synthetic.main.item_friend_request.view.*
 import ru.nickb.chatktln.R
 import ru.nickb.chatktln.domain.friends.FriendEntity
 import ru.nickb.chatktln.ui.core.BaseAdapter
+import ru.nickb.chatktln.ui.core.GlideHelper
 
 open class FriendRequestAdapter: BaseAdapter<FriendRequestAdapter.FriendRequestViewHolder>() {
     override val layoutRes: Int = R.layout.item_friend_request
@@ -12,7 +13,7 @@ open class FriendRequestAdapter: BaseAdapter<FriendRequestAdapter.FriendRequestV
     override fun createHolder(
         view: View,
         viewType: Int
-    ): FriendRequestAdapter.FriendRequestViewHolder {
+    ): FriendRequestViewHolder {
         return FriendRequestViewHolder(view)
     }
 
@@ -30,6 +31,7 @@ open class FriendRequestAdapter: BaseAdapter<FriendRequestAdapter.FriendRequestV
         override fun onBind(item: Any) {
 
             (item as? FriendEntity)?.let {
+                GlideHelper.loadImage(view.context, it.image, view.imgPhoto, R.drawable.ic_account_circle)
                 view.tvName.text = it.name
             }
         }
