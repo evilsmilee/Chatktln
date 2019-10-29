@@ -6,6 +6,7 @@ import dagger.Provides
 import ru.nickb.chatktln.data.account.AccountCache
 import ru.nickb.chatktln.data.account.AccountRemote
 import ru.nickb.chatktln.data.account.AccountRepositoryImpl
+import ru.nickb.chatktln.data.friends.FriendsCache
 import ru.nickb.chatktln.data.friends.FriendsRemote
 import ru.nickb.chatktln.data.friends.FriendsRepositoryImpl
 import ru.nickb.chatktln.data.media.MediaRepositoryImpl
@@ -29,8 +30,8 @@ class AppModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideFriendsRepository(remote: FriendsRemote, cache: AccountCache): FriendsRepository {
-        return FriendsRepositoryImpl(cache, remote)
+    fun provideFriendsRepository(remote: FriendsRemote, accountCache: AccountCache, friendsCache: FriendsCache): FriendsRepository {
+        return FriendsRepositoryImpl(accountCache, remote, friendsCache)
     }
 
     @Provides

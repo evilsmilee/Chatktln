@@ -3,34 +3,58 @@ package ru.nickb.chatktln.data.friends
 import ru.nickb.chatktln.data.account.AccountCache
 import ru.nickb.chatktln.domain.friends.FriendEntity
 import ru.nickb.chatktln.domain.friends.FriendsRepository
-import ru.nickb.chatktln.domain.type.Either
-import ru.nickb.chatktln.domain.type.Failure
-import ru.nickb.chatktln.domain.type.None
-import ru.nickb.chatktln.domain.type.flatMap
+import ru.nickb.chatktln.domain.type.*
 import javax.inject.Inject
 
 /*Реализация методов интерфейса*/
 
-class FriendsRepositoryImpl @Inject constructor(private val accountCache: AccountCache, private val friendsRemote: FriendsRemote): FriendsRepository {
+/*Добавлены блоки onNext*/
 
-    override fun getFriends(): Either<Failure, List<FriendEntity>> {
+class FriendsRepositoryImpl(
+    private val accountCache: AccountCache,
+    private val friendsRemote: FriendsRemote,
+    private val friendsCache: FriendsCache): FriendsRepository {
+
+    override fun getFriends(needFetch: Boolean): Either<Failure, List<FriendEntity>> {
        return accountCache.getCurrentAccount()
-           .flatMap { friendsRemote.getFriends(it.id, it.token) }
+           .flatMap {
+               return@flatMap if (needFetch) {
+                   friendsRemote.getFriends(it.id, it.token)
+               } else {
+                   Either.Right(friendsCache.getFriends())
+               }
+           }
+           .onNext { it.map { friendsCache.saveFriend(it) } }
     }
 
-    override fun getFriendRequests(): Either<Failure, List<FriendEntity>> {
+    override fun getFriendRequests(needFetch: Boolean): Either<Failure, List<FriendEntity>> {
         return accountCache.getCurrentAccount()
-            .flatMap { friendsRemote.getFriendRequests(userId = it.id, token = it.token) }
+            .flatMap {
+                return@flatMap if (needFetch) {
+                    friendsRemote.getFriendRequests(it.id, it.token)
+                } else {
+                    Either.Right(friendsCache.getFriendRequests())
+                }
+            }
+            .onNext { it.map {
+                it.isRequest = 1
+                friendsCache.saveFriend(it)
+            } }
     }
 
     override fun approveFriendRequest(friendEntity: FriendEntity): Either<Failure, None> {
         return accountCache.getCurrentAccount()
             .flatMap { friendsRemote.approveFriendRequst(userId = it.id, requestUserId = friendEntity.id, friendsId = friendEntity.friendsId, token = it.token) }
+            .onNext {
+                friendEntity.isRequest = 0
+                friendsCache.saveFriend(friendEntity)
+            }
     }
 
     override fun cancelFriendRequest(friendEntity: FriendEntity): Either<Failure, None> {
        return accountCache.getCurrentAccount()
            .flatMap { friendsRemote.cancelFriendRequest(userId = it.id, requestUserId = friendEntity.id, friendsId = friendEntity.friendsId, token = it.token) }
+           .onNext { friendsCache.removeFriendEntity(friendEntity.id) }
     }
 
     override fun addFriend(email: String): Either<Failure, None> {
@@ -41,6 +65,7 @@ class FriendsRepositoryImpl @Inject constructor(private val accountCache: Accoun
     override fun deleteFriend(friendEntity: FriendEntity): Either<Failure, None> {
        return accountCache.getCurrentAccount()
            .flatMap { friendsRemote.deleteFriend(it.id, friendEntity.id, friendEntity.friendsId, it.token) }
+           .onNext { friendsCache.removeFriendEntity(friendEntity.id) }
     }
 
 }

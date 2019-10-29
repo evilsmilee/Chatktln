@@ -5,8 +5,10 @@ import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import ru.nickb.chatktln.cache.AccountCacheImpl
+import ru.nickb.chatktln.cache.ChatDatabase
 import ru.nickb.chatktln.cache.SharedPrefsManager
 import ru.nickb.chatktln.data.account.AccountCache
+import ru.nickb.chatktln.data.friends.FriendsCache
 import javax.inject.Singleton
 
 @Module
@@ -21,4 +23,17 @@ class CacheModule {
     @Singleton
     @Provides
     fun providesAccountCache(prefsManager: SharedPrefsManager): AccountCache = AccountCacheImpl(prefsManager)
+
+    @Provides
+    @Singleton
+    fun provideChatDatabase(context: Context): ChatDatabase {
+        return ChatDatabase.getInstance(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFriendsCache(chatDatabase: ChatDatabase): FriendsCache {
+        return chatDatabase.friendsDao
+    }
+
 }
