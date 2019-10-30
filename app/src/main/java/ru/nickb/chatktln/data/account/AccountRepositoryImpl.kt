@@ -7,6 +7,7 @@ import java.util.*
 
 class AccountRepositoryImpl(private val accountRemote: AccountRemote, private val accountCache: AccountCache): AccountRepository {
 
+
     override fun login(email: String, password: String): Either<Failure, AccountEntity> {
         return accountCache.getToken().flatMap {
             accountRemote.login(email, password, it)
@@ -52,6 +53,10 @@ class AccountRepositoryImpl(private val accountRemote: AccountRemote, private va
             entity.image = it.image
             accountCache.saveAccount(entity)
         }
+    }
+
+    override fun checkAuth(): Either<Failure, Boolean> {
+        return accountCache.checkAuth()
     }
 
 }

@@ -9,7 +9,7 @@ import javax.inject.Inject
 /*Модельный класс. Содержит данные друга*/
 
 @Entity(tableName = "friends_table")
-class FriendEntity @Inject constructor(
+data class FriendEntity @Inject constructor(
     @PrimaryKey
     @SerializedName("user_id")
     var id: Long,

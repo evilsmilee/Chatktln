@@ -12,7 +12,7 @@ import ru.nickb.chatktln.ui.core.BaseListFragment
 import ru.nickb.chatktln.ui.core.ext.onFailure
 import ru.nickb.chatktln.ui.core.ext.onSuccess
 
-class FriendRequestFragment : BaseListFragment() {
+class FriendRequestsFragment : BaseListFragment() {
     override val viewAdapter = FriendRequestAdapter()
 
     override val layoutId: Int = R.layout.inner_fragment_list

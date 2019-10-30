@@ -13,7 +13,7 @@ abstract class BaseAdapter<VH: BaseAdapter.BaseViewHolder>: RecyclerView.Adapter
 
     abstract val layoutRes: Int
 
-    abstract fun createHolder(view: View, viewType: Int): VH
+    abstract fun createHolder(parent: ViewGroup): VH
 
     override fun getItemCount(): Int {
         return items.size
@@ -26,8 +26,7 @@ abstract class BaseAdapter<VH: BaseAdapter.BaseViewHolder>: RecyclerView.Adapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val v = LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
-        return createHolder(v, viewType)
+        return createHolder(parent)
     }
 
     fun getItem(position: Int): Any {

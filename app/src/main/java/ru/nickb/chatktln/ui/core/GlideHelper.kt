@@ -3,6 +3,7 @@ package ru.nickb.chatktln.ui.core
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import ru.nickb.chatktln.remote.service.ServiceFactory
 
@@ -22,5 +23,11 @@ object GlideHelper {
 
     fun loadImage(context: Context, path: String?, iv: ImageView, placeholder: Int) {
         loadImage(context, path, iv, context.resources.getDrawable(placeholder))
+    }
+
+    @JvmStatic
+    @BindingAdapter("profileImage")
+    fun ImageView.loadImage(image: String?) {
+        loadImage(this.context, image, this)
     }
 }

@@ -81,9 +81,9 @@ class SharedPrefsManager @Inject constructor(private val prefs: SharedPreference
         return Either.Right(None())
     }
 
-    fun contatintsAnyAccount(): Boolean {
+    fun contatintsAnyAccount(): Either<Failure, Boolean> {
         val id = prefs.getLong(ACCOUNT_ID, 0)
-        return id != 0L
+        return Either.Right(id != 0L)
     }
 }
 

@@ -2,7 +2,6 @@ package ru.nickb.chatktln.ui
 
 import android.app.Application
 import dagger.Component
-import ru.nickb.chatktln.domain.account.AccountEntity
 import ru.nickb.chatktln.injection.AppModule
 import ru.nickb.chatktln.injection.CacheModule
 import ru.nickb.chatktln.injection.RemoteModule
@@ -13,7 +12,7 @@ import ru.nickb.chatktln.ui.core.navigation.RouteActivity
 import ru.nickb.chatktln.ui.register.RegisterActivity
 import ru.nickb.chatktln.ui.register.RegisterFragment
 import ru.nickb.chatktln.ui.firebase.FirebaseService
-import ru.nickb.chatktln.ui.friends.FriendRequestFragment
+import ru.nickb.chatktln.ui.friends.FriendRequestsFragment
 import ru.nickb.chatktln.ui.friends.FriendsFragment
 import ru.nickb.chatktln.ui.home.ChatsFragment
 import ru.nickb.chatktln.ui.home.HomeActivity
@@ -54,7 +53,7 @@ interface  AppComponent {
     fun inject(fragment: LoginFragment)
     fun inject(fragment: ChatsFragment)
     fun inject(fragment: FriendsFragment)
-    fun inject(fragment: FriendRequestFragment)
+    fun inject(fragment: FriendRequestsFragment)
     fun inject(fragment: AccountFragment)
 
     //services

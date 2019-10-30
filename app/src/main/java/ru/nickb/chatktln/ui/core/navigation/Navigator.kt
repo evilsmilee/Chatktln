@@ -25,9 +25,8 @@ import javax.inject.Singleton
 class Navigator @Inject constructor(private val authenticator: Authenticator, private val permissionManager: PermissionManager) {
 
     fun showMain(context: Context) {
-        when(authenticator.userLoggedIn()) {
-            true -> showHome(context, false)
-            false -> showLogin(context, false)
+        authenticator.userLoggedIn {
+            if (it) showHome(context, false) else showLogin(context, false)
         }
     }
 
