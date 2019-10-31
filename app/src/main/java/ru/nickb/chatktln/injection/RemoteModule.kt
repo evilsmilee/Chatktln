@@ -5,9 +5,12 @@ import dagger.Provides
 import ru.nickb.chatktln.BuildConfig
 import ru.nickb.chatktln.data.account.AccountRemote
 import ru.nickb.chatktln.data.friends.FriendsRemote
+import ru.nickb.chatktln.data.messages.MessagesRemote
+import ru.nickb.chatktln.data.messages.MessagesRepositoryImpl
 import ru.nickb.chatktln.remote.account.AccountRemoteImpl
 import ru.nickb.chatktln.remote.core.Request
 import ru.nickb.chatktln.remote.friends.FriendsRemoteImpl
+import ru.nickb.chatktln.remote.messages.MessagesRemoteImpl
 import ru.nickb.chatktln.remote.service.ApiService
 import ru.nickb.chatktln.remote.service.ServiceFactory
 import javax.inject.Singleton
@@ -29,5 +32,11 @@ class RemoteModule {
     @Provides
     fun provideFriendsRemote(request: Request, apiService: ApiService): FriendsRemote {
         return FriendsRemoteImpl(request, apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMessagesRemote(request: Request, apiService: ApiService): MessagesRemote {
+        return MessagesRemoteImpl(request, apiService)
     }
 }

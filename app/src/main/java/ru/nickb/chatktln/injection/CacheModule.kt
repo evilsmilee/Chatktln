@@ -9,6 +9,7 @@ import ru.nickb.chatktln.cache.ChatDatabase
 import ru.nickb.chatktln.cache.SharedPrefsManager
 import ru.nickb.chatktln.data.account.AccountCache
 import ru.nickb.chatktln.data.friends.FriendsCache
+import ru.nickb.chatktln.data.messages.MessagesCache
 import javax.inject.Singleton
 
 @Module
@@ -36,4 +37,9 @@ class CacheModule {
         return chatDatabase.friendsDao
     }
 
+    @Provides
+    @Singleton
+    fun provideMessagesCache(chatDatabase: ChatDatabase): MessagesCache {
+        return chatDatabase.messagesDao
+    }
 }

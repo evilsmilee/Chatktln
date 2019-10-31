@@ -7,9 +7,9 @@ import ru.nickb.chatktln.domain.type.*
 import javax.inject.Inject
 
 class MessagesRepositoryImpl @Inject constructor(
-    val messagesCache: MessagesCache,
-    val messagesRemote: MessagesRemote,
-    val accountCache: AccountCache
+    private val messagesRemote: MessagesRemote,
+    private val messagesCache: MessagesCache,
+    private val accountCache: AccountCache
 ) : MessagesRepository {
 
     /*Вызывает из бд текущего пользователя для получения id и токена, преобразовывает сущность акк в сущность сообщения

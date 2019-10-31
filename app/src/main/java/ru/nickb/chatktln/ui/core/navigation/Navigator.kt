@@ -15,6 +15,7 @@ import ru.nickb.chatktln.remote.service.ApiService
 import ru.nickb.chatktln.ui.account.AccountActivity
 import ru.nickb.chatktln.ui.core.PermissionManager
 import ru.nickb.chatktln.ui.home.HomeActivity
+import ru.nickb.chatktln.ui.home.MessagesActivity
 import ru.nickb.chatktln.ui.login.LoginActivity
 import ru.nickb.chatktln.ui.register.RegisterActivity
 import ru.nickb.chatktln.ui.user.UserActivity
@@ -31,8 +32,9 @@ class Navigator @Inject constructor(private val authenticator: Authenticator, pr
     }
 
     fun showLogin(context: Context, newTask: Boolean = true) = context.startActivity<LoginActivity>(newTask = newTask)
-    fun showHome(context: Context, newTask: Boolean = true) = context.startActivity<HomeActivity>(newTask = newTask)
     fun showSignUp(context: Context) = context.startActivity<RegisterActivity>()
+
+    fun showHome(context: Context, newTask: Boolean = true) = context.startActivity<HomeActivity>(newTask = newTask)
 
     fun showEmailNotFoundDialog(context: Context, email: String) {
         AlertDialog.Builder(context)
@@ -73,6 +75,13 @@ class Navigator @Inject constructor(private val authenticator: Authenticator, pr
         bundle.putString(ApiService.PARAM_EMAIL, friendEntity.email)
         bundle.putString(ApiService.PARAM_STATUS, friendEntity.status)
         context.startActivity<UserActivity>(args = bundle)
+    }
+
+    fun showChatWithContact(contactId: Long, contactName: String, context: Context) {
+        val bundle = Bundle()
+        bundle.putLong(ApiService.PARAM_CONTACT_ID, contactId)
+        bundle.putString(ApiService.PARAM_NAME, contactName)
+        context.startActivity<MessagesActivity>(args = bundle)
     }
 
     fun showPickFromDialog(activity: AppCompatActivity, onPick: (fromCamera: Boolean) -> Unit) {

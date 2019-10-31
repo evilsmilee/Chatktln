@@ -16,6 +16,7 @@ import ru.nickb.chatktln.ui.friends.FriendRequestsFragment
 import ru.nickb.chatktln.ui.friends.FriendsFragment
 import ru.nickb.chatktln.ui.home.ChatsFragment
 import ru.nickb.chatktln.ui.home.HomeActivity
+import ru.nickb.chatktln.ui.home.MessagesFragment
 import ru.nickb.chatktln.ui.login.LoginFragment
 import javax.inject.Singleton
 
@@ -45,7 +46,6 @@ interface  AppComponent {
     fun inject(activity: RegisterActivity)
     fun inject(activity: HomeActivity)
     fun inject(activity: RouteActivity)
-    /*fun inject(activity: AccountEntity)*/
     fun inject(activity: AccountActivity)
 
     //fragments
@@ -55,6 +55,7 @@ interface  AppComponent {
     fun inject(fragment: FriendsFragment)
     fun inject(fragment: FriendRequestsFragment)
     fun inject(fragment: AccountFragment)
+    fun inject(fragment: MessagesFragment)
 
     //services
     fun inject(service: FirebaseService)
