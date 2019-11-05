@@ -11,7 +11,7 @@ import ru.nickb.chatktln.ui.core.BaseAdapter
 import ru.nickb.chatktln.ui.core.GlideHelper
 
 open class FriendsAdapter: BaseAdapter<FriendsAdapter.FriendsViewHolder>() {
-    override val layoutRes = R.layout.item_friend
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

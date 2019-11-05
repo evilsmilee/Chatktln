@@ -18,6 +18,7 @@ interface FriendsDao: FriendsCache {
             update(entity)
         }
     }
+    
 
     @Query("SELECT * from friends_table WHERE id = :key")
     override fun getFriend(key: Long): FriendEntity?

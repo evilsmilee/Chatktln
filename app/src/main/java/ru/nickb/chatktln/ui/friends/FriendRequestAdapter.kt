@@ -12,7 +12,7 @@ import ru.nickb.chatktln.ui.core.BaseAdapter
 import ru.nickb.chatktln.ui.core.GlideHelper
 
 open class FriendRequestAdapter: BaseAdapter<FriendRequestAdapter.FriendRequestViewHolder>() {
-    override val layoutRes: Int = R.layout.item_friend_request
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendRequestViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

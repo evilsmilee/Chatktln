@@ -32,6 +32,7 @@ class MessagesFragment: BaseFragment() {
     private var contactName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         App.appComponent.inject(this)
     }

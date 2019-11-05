@@ -14,6 +14,7 @@ import ru.nickb.chatktln.ui.register.RegisterFragment
 import ru.nickb.chatktln.ui.firebase.FirebaseService
 import ru.nickb.chatktln.ui.friends.FriendRequestsFragment
 import ru.nickb.chatktln.ui.friends.FriendsFragment
+import ru.nickb.chatktln.ui.home.ChatFragment
 import ru.nickb.chatktln.ui.home.ChatsFragment
 import ru.nickb.chatktln.ui.home.HomeActivity
 import ru.nickb.chatktln.ui.home.MessagesFragment
@@ -56,6 +57,7 @@ interface  AppComponent {
     fun inject(fragment: FriendRequestsFragment)
     fun inject(fragment: AccountFragment)
     fun inject(fragment: MessagesFragment)
+    fun inject(fragment: ChatFragment)
 
     //services
     fun inject(service: FirebaseService)
