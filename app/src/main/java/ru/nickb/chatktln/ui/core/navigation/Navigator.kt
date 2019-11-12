@@ -1,10 +1,13 @@
 package ru.nickb.chatktln.ui.core.navigation
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import ru.nickb.chatktln.R
@@ -124,7 +127,39 @@ class Navigator @Inject constructor(private val authenticator: Authenticator, pr
         activity.startActivityForResult(intent, MediaViewModel.PICK_IMAGE_REQUEST_CODE)
     }
 
+    fun showDeleteMessageDialog(context: Context, onPositive: () -> Unit) {
+        AlertDialog.Builder(context)
+            .setMessage(context.getString(R.string.remove_message))
+
+            .setPositiveButton(android.R.string.yes) {dialog, which ->
+                onPositive()
+                dialog.dismiss()
+            }
+
+            .setNegativeButton(android.R.string.no, null)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .show()
+    }
+
+    fun showImageDialog(context: Context, image: Drawable) {
+        val view = LayoutInflater.from(context).inflate(
+            R.layout.dialog_image,
+            null
+        )
+
+        val dialog = Dialog(context, R.style.DialogFullScreen)
+
+        view.imageView.setImageDrawable(image)
+        dialog.setContentView(view)
+
+        view.imageView.setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
+    }
+
 }
+
+
 
 private inline fun <reified T> Context.startActivity(newTask: Boolean = false, args: Bundle? = null) {
     this.startActivity(Intent(this, T::class.java).apply {

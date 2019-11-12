@@ -3,21 +3,15 @@ package ru.nickb.chatktln.ui.core
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<VH: BaseAdapter.BaseViewHolder>: RecyclerView.Adapter<VH>() {
+abstract class BaseAdapter<Item: Any, VH: BaseAdapter.BaseViewHolder>(diff: DiffUtil.ItemCallback<Item>): ListAdapter<Item, VH>(diff) {
 
-    var items: ArrayList<Any> = ArrayList()
 
     var onClick: OnClick? = null
 
-    /*abstract val layoutRes: Int*/
-
-    /*abstract fun createHolder(parent: ViewGroup): VH*/
-
-    override fun getItemCount(): Int {
-        return items.size
-    }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bind(getItem(position))
@@ -25,25 +19,7 @@ abstract class BaseAdapter<VH: BaseAdapter.BaseViewHolder>: RecyclerView.Adapter
         holder.onClick = onClick
     }
 
-   /* override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        return createHolder(parent)
-    }*/
 
-    fun getItem(position: Int): Any {
-        return items[position]
-    }
-
-    fun add(newItem: Any) {
-        items.add(newItem)
-    }
-
-    fun add(newItems: List<Any>) {
-        items.addAll(newItems)
-    }
-
-    fun clear() {
-        items.clear()
-    }
 
     fun setOnClick(click: (Any?, View) -> Unit, longClick: (Any?, View) -> Unit = {_ , _ ->}) {
         onClick = object : OnClick {

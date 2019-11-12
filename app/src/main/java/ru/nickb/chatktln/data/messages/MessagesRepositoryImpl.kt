@@ -68,4 +68,11 @@ class MessagesRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun deleteMessagesByUser(messageId: Long): Either<Failure, None> {
+        return accountCache.getCurrentAccount().flatMap {
+            messagesCache.deleteMessagesByUser(messageId)
+            messagesRemote.deleteMessagesByUser(it.id, messageId, it.token)
+        }
+    }
+
 }

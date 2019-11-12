@@ -15,6 +15,7 @@ import ru.nickb.chatktln.domain.type.Failure
 import ru.nickb.chatktln.domain.type.None
 import ru.nickb.chatktln.presentation.viewmodel.AccountViewModel
 import ru.nickb.chatktln.presentation.viewmodel.FriendsViewModel
+import ru.nickb.chatktln.remote.service.ApiService
 import ru.nickb.chatktln.ui.App
 import ru.nickb.chatktln.ui.core.BaseActivity
 import ru.nickb.chatktln.ui.core.BaseFragment
@@ -75,6 +76,11 @@ class HomeActivity : BaseActivity() {
                 openDrawer()
                 friendsViewModel.getFriendRequests()
                 binding.navigation.requestContainer.visibility = View.VISIBLE
+            }
+            NotificationHelper.TYPE_SEND_MESSAGE -> {
+                val contactId = intent.getLongExtra(ApiService.PARAM_CONTACT_ID, 0L)
+                val contactName = intent.getStringExtra(ApiService.PARAM_NAME)
+                navigator.showChatWithContact(contactId, contactName, this)
             }
         }
 
@@ -141,6 +147,7 @@ class HomeActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         accountViewModel.getAccount()
+        accountViewModel.updateLastSeen()
     }
 
     private fun openDrawer() {

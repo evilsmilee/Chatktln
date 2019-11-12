@@ -1,6 +1,9 @@
 package ru.nickb.chatktln.remote.messages
 
 import android.app.DownloadManager
+import com.google.gson.JsonObject
+import org.json.JSONArray
+import org.json.JSONObject
 import ru.nickb.chatktln.data.messages.MessagesRemote
 import ru.nickb.chatktln.domain.messages.MessageEntity
 import ru.nickb.chatktln.domain.type.Either
@@ -39,6 +42,16 @@ class MessagesRemoteImpl  @Inject constructor(
         return request.make(service.sendMessage(
             createSendMessageMap(fromId, toId, token, message, image))) {None()}
 
+    }
+
+    override fun deleteMessagesByUser(
+        userId: Long,
+        messagesId: Long,
+        token: String
+    ): Either<Failure, None> {
+        return request.make(
+            service.deleteMessagesByUser(
+                createDeleteMessagesMap(userId, messagesId, token))) { None() }
     }
 
     private fun createGetLastMessagesMap(
@@ -88,6 +101,27 @@ class MessagesRemoteImpl  @Inject constructor(
         map.put(ApiService.PARAM_MESSAGE, message)
         map.put(ApiService.PARAM_MESSAGE_TYPE, type.toString())
         map.put(ApiService.PARAM_MESSAGE_DATE, date.toString())
+
+        return map
+    }
+
+    private fun createDeleteMessagesMap(
+        userId: Long,
+        messageId: Long,
+        token: String
+    ): Map<String, String> {
+        val itemsArrayObject = JSONObject()
+        val itemsArray = JSONArray()
+        val itemObject = JSONObject()
+
+        itemObject.put("message_id", messageId)
+        itemsArray.put(itemObject)
+        itemsArrayObject.put("messages", itemsArray)
+
+        val map = HashMap<String, String>()
+        map.put(ApiService.PARAM_USER_ID, userId.toString())
+        map.put(ApiService.PARAM_MESSAGES_IDS, itemsArrayObject.toString())
+        map.put(ApiService.PARAM_TOKEN, token)
 
         return map
     }

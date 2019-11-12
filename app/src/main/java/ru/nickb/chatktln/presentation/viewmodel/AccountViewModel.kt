@@ -8,10 +8,11 @@ import javax.inject.Inject
 
 class AccountViewModel @Inject constructor(
     val registerUseCase: Register,
-    val loginUseCace: Login,
+    val loginUseCase: Login,
     val getAccountUseCase: GetAccount,
     val logoutUseCase: Logout,
-    val editAccountUseCase: EditAccount
+    val editAccountUseCase: EditAccount,
+    val updateLastSeenUseCase: UpdateLastSeen
 ): BaseViewModel() {
 
     var registerData: MutableLiveData<None> = MutableLiveData()
@@ -26,7 +27,7 @@ class AccountViewModel @Inject constructor(
     }
 
     fun login(email: String, password: String) {
-        loginUseCace(Login.Params(email, password)) {
+        loginUseCase(Login.Params(email, password)) {
             it.either(::handleFailure, ::handleAccount)
         }
     }
@@ -41,6 +42,10 @@ class AccountViewModel @Inject constructor(
 
     fun editAccount(entity: AccountEntity) {
         editAccountUseCase(entity) { it.either(::handleFailure, ::handleEditAccount) }
+    }
+
+    fun updateLastSeen() {
+        updateLastSeenUseCase(None()) {it.either(::handleFailure) {} }
     }
 
     private fun handleRegister(none: None) {
@@ -62,7 +67,7 @@ class AccountViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         registerUseCase.unsubscribe()
-        loginUseCace.unsubscribe()
+        loginUseCase.unsubscribe()
         getAccountUseCase.unsubscribe()
         logoutUseCase.unsubscribe()
     }

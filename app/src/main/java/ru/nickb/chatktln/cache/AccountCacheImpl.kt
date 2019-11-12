@@ -7,7 +7,7 @@ import ru.nickb.chatktln.domain.type.Failure
 import ru.nickb.chatktln.domain.type.None
 import javax.inject.Inject
 
-class AccountCacheImpl @Inject constructor(private val prefsManager: SharedPrefsManager): AccountCache {
+class AccountCacheImpl @Inject constructor(private val prefsManager: SharedPrefsManager, private val chatDatabase: ChatDatabase): AccountCache {
 
 
     override fun getToken(): Either<Failure, String> {
@@ -19,6 +19,7 @@ class AccountCacheImpl @Inject constructor(private val prefsManager: SharedPrefs
     }
 
     override fun logout(): Either<Failure, None> {
+        chatDatabase.clearAllTables()
         return prefsManager.removeAccount()
     }
 

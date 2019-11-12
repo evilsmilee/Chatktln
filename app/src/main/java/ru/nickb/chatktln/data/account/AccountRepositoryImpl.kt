@@ -42,7 +42,9 @@ class AccountRepositoryImpl(private val accountRemote: AccountRemote, private va
     }
 
     override fun updateAccountLastSeen(): Either<Failure, None> {
-        throw UnsupportedOperationException("Updating last seen is not supported")
+        return accountCache.getCurrentAccount().flatMap {
+            accountRemote.updateAccountLastSeen(it.id, it.token, Date().time)
+        }
     }
 
     override fun editAccount(entity: AccountEntity): Either<Failure, AccountEntity> {

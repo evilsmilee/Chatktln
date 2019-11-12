@@ -72,5 +72,11 @@
     <string name="message">Сообщение</string>
     <string name="send_message">отправляет вам сообщение</string>
 
+    <string name="photo">Фотография</string>
+
+    <string name="remove_message">Удалить сообщение?</string>
+
+    <string name="send_friend_message">Отправить сообщение</string>
+
 
 </resources>

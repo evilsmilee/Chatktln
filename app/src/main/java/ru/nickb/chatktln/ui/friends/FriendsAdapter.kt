@@ -3,6 +3,7 @@ package ru.nickb.chatktln.ui.friends
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import kotlinx.android.synthetic.main.item_friend.view.*
 import ru.nickb.chatktln.R
 import ru.nickb.chatktln.databinding.ItemFriendBinding
@@ -10,7 +11,7 @@ import ru.nickb.chatktln.domain.friends.FriendEntity
 import ru.nickb.chatktln.ui.core.BaseAdapter
 import ru.nickb.chatktln.ui.core.GlideHelper
 
-open class FriendsAdapter: BaseAdapter<FriendsAdapter.FriendsViewHolder>() {
+open class FriendsAdapter: BaseAdapter<FriendEntity, FriendsAdapter.FriendsViewHolder>(FriendsDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendsViewHolder {
@@ -39,4 +40,16 @@ open class FriendsAdapter: BaseAdapter<FriendsAdapter.FriendsViewHolder>() {
             }
         }
     }
+
+    class FriendsDiffCallback : DiffUtil.ItemCallback<FriendEntity>() {
+
+        override fun areItemsTheSame(oldItem: FriendEntity, newItem: FriendEntity): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: FriendEntity, newItem: FriendEntity): Boolean {
+            return oldItem == newItem
+        }
+    }
 }
+

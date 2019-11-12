@@ -9,7 +9,7 @@ import ru.nickb.chatktln.cache.messages.MessagesDao
 import ru.nickb.chatktln.domain.friends.FriendEntity
 import ru.nickb.chatktln.domain.messages.MessageEntity
 
-@Database(entities = [FriendEntity::class, MessageEntity::class], version = 2, exportSchema = false)
+@Database(entities = [FriendEntity::class, MessageEntity::class], version = 8, exportSchema = false)
 abstract class ChatDatabase: RoomDatabase() {
     abstract val friendsDao: FriendsDao
     abstract val messagesDao: MessagesDao

@@ -7,10 +7,10 @@ import ru.nickb.chatktln.domain.messages.MessageEntity
 import ru.nickb.chatktln.ui.core.BaseAdapter
 
 
-open class ChatsAdapter : BaseAdapter<ChatsAdapter.ChatViewHolder>() {
+open class ChatsAdapter : MessagesAdapter() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemChatBinding.inflate(layoutInflater, parent, false)
         return ChatViewHolder(binding)

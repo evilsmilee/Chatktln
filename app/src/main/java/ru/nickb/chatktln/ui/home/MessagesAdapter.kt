@@ -9,9 +9,9 @@ import ru.nickb.chatktln.databinding.ItemMessageOtherBinding
 import ru.nickb.chatktln.domain.messages.MessageEntity
 import ru.nickb.chatktln.ui.core.BaseAdapter
 
-class MessagesAdapter: ListAdapter<MessageEntity, BaseAdapter.BaseViewHolder>(MessageDiffCallback()) {
+open class MessagesAdapter: BaseAdapter<MessageEntity, BaseAdapter.BaseViewHolder>(MessageDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseAdapter.BaseViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
         val holder = if (viewType == 0) {
@@ -22,9 +22,9 @@ class MessagesAdapter: ListAdapter<MessageEntity, BaseAdapter.BaseViewHolder>(Me
         return holder
     }
 
-    override fun onBindViewHolder(holder: BaseAdapter.BaseViewHolder, position: Int) {
+ /*   override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         holder.bind(getItem(position))
-    }
+    }*/
 
     override fun getItemViewType(position: Int): Int {
         (getItem(position) as MessageEntity).let {
@@ -32,9 +32,15 @@ class MessagesAdapter: ListAdapter<MessageEntity, BaseAdapter.BaseViewHolder>(Me
         }
     }
 
-    class MessageMeViewHolder(val binding: ItemMessageMeBinding) : BaseAdapter.BaseViewHolder(binding.root) {
+    class MessageMeViewHolder(val binding: ItemMessageMeBinding) : BaseViewHolder(binding.root) {
         init {
-            binding.root.setOnClickListener {
+            binding.root.setOnLongClickListener {
+                onClick?.onLongClick(item, it)
+
+                true
+            }
+
+            binding.imgPhoto.setOnClickListener {
                 onClick?.onClick(item, it)
             }
         }
@@ -46,9 +52,15 @@ class MessagesAdapter: ListAdapter<MessageEntity, BaseAdapter.BaseViewHolder>(Me
         }
     }
 
-    class MessageOtherViewHolder(val binding: ItemMessageOtherBinding): BaseAdapter.BaseViewHolder(binding.root) {
+    class MessageOtherViewHolder(val binding: ItemMessageOtherBinding): BaseViewHolder(binding.root) {
         init {
-            binding.root.setOnClickListener {
+            binding.root.setOnLongClickListener {
+                onClick?.onLongClick(item, it)
+
+                true
+            }
+
+            binding.imgPhoto.setOnClickListener {
                 onClick?.onClick(item, it)
             }
         }

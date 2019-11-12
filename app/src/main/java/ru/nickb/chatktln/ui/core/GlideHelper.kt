@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import ru.nickb.chatktln.R
 import ru.nickb.chatktln.remote.service.ServiceFactory
 
 object GlideHelper {
@@ -28,6 +29,13 @@ object GlideHelper {
     @JvmStatic
     @BindingAdapter("profileImage")
     fun ImageView.loadImage(image: String?) {
-        loadImage(this.context, image, this)
+        loadImage(this.context, image, this, R.drawable.ic_account_circle)
+    }
+
+    @JvmStatic
+    @BindingAdapter("messageImage")
+    fun ImageView.loadMessageImage(message: String?) {
+        if (message.isNullOrBlank()) return
+        loadImage(this.context, message, this, R.drawable.placeholder)
     }
 }

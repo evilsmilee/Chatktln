@@ -13,4 +13,6 @@ interface AccountRemote {
     fun updateToken(userId: Long, token: String, oldToken: String): Either<Failure, None>
 
     fun editUser(userId: Long, email: String, name: String, password: String, status: String, token: String, image: String): Either<Failure, AccountEntity>
+
+    fun updateAccountLastSeen(userId: Long, token: String, lastSeen: Long): Either<Failure, None>
 }
