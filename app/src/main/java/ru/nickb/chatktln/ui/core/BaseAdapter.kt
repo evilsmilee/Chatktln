@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<Item: Any, VH: BaseAdapter.BaseViewHolder>(diff: DiffUtil.ItemCallback<Item>): ListAdapter<Item, VH>(diff) {
+abstract class BaseAdapter<Item: Any, VH: BaseAdapter.BaseViewHolder>
+    (diff: DiffUtil.ItemCallback<Item>): ListAdapter<Item, VH>(diff) {
 
 
     var onClick: OnClick? = null

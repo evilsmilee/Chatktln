@@ -11,7 +11,7 @@ import ru.nickb.chatktln.remote.service.ServiceFactory
 object GlideHelper {
 
     //Сервер отдает неполную ссылку на изображение(без доменного имени). GlideHelper преобразовывает ее в полную, добавляя доменное имя.
-    fun loadImage (context: Context, path: String?, iv: ImageView, placeholder: Drawable = iv.drawable) {
+    fun loadImage (context: Context, path: String?, iv: ImageView, placeholder: Drawable? = iv.drawable) {
         val imgPath = ServiceFactory.SERVER_URL + path?.replace("..", "")
 
         Glide.with(context)

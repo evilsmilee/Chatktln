@@ -47,7 +47,7 @@ class PermissionManager @Inject constructor() {
 fun PermissionUtil.PermissionRequestObject.ask(code: Int, granted: () -> Unit): PermissionUtil.PermissionRequestObject? {
     return this.onAllGranted(object : Func() {
         override fun call() {
-            granted
+            granted()
         }
     }).ask(code)
 }

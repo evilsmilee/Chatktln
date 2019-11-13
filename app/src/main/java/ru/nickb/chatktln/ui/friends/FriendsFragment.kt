@@ -71,7 +71,7 @@ class FriendsFragment: BaseListFragment() {
 
     private fun handleFriends(friends: List<FriendEntity>?) {
         hideProgress()
-        if (friends != null) {
+        if (friends != null && friends.isNotEmpty()) {
             viewAdapter.submitList(friends)
         }
     }

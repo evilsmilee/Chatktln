@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.Observer
@@ -74,6 +75,7 @@ class MessagesFragment: BaseListFragment() {
         }
 
         btnSend.setOnClickListener {
+            Log.i("test1" ,"click click")
             sendMessage()
         }
 
@@ -89,7 +91,8 @@ class MessagesFragment: BaseListFragment() {
             }
         }
 
-        ChatDatabase.getInstance(requireContext()).messagesDao.getLiveMessagesWithContact(contactId).observe(this, Observer {
+        ChatDatabase.getInstance(requireContext()).messagesDao.getLiveMessagesWithContact(contactId)
+            .observe(this, Observer {
             handleMessages(it)
         })
 
@@ -137,6 +140,7 @@ class MessagesFragment: BaseListFragment() {
     }
 
     private fun sendMessage(image: String = "") {
+        Log.i("test1" ,contactId.toString())
         if (contactId == 0L) return
 
         val text = etText.text.toString()

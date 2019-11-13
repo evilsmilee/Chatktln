@@ -78,6 +78,7 @@ class Navigator @Inject constructor(private val authenticator: Authenticator, pr
         bundle.putString(ApiService.PARAM_NAME, friendEntity.name)
         bundle.putString(ApiService.PARAM_EMAIL, friendEntity.email)
         bundle.putString(ApiService.PARAM_STATUS, friendEntity.status)
+        bundle.putLong(ApiService.PARAM_CONTACT_ID, friendEntity.id)
         context.startActivity<UserActivity>(args = bundle)
     }
 
@@ -101,7 +102,7 @@ class Navigator @Inject constructor(private val authenticator: Authenticator, pr
             when(options[item]) {
                 activity.getString(R.string.camera) -> {
                     permissionManager.checkCameraPermission(activity) {
-                        onPick
+                        onPick(true)
                     }
                 }
                 activity.getString(R.string.gallery) -> {

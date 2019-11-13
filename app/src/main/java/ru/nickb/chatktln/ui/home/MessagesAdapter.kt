@@ -22,10 +22,6 @@ open class MessagesAdapter: BaseAdapter<MessageEntity, BaseAdapter.BaseViewHolde
         return holder
     }
 
- /*   override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }*/
-
     override fun getItemViewType(position: Int): Int {
         (getItem(position) as MessageEntity).let {
             return if (it.fromMe) 0 else 1

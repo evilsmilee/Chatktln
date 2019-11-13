@@ -70,5 +70,6 @@ class AccountViewModel @Inject constructor(
         loginUseCase.unsubscribe()
         getAccountUseCase.unsubscribe()
         logoutUseCase.unsubscribe()
+        updateLastSeenUseCase.unsubscribe()
     }
 }

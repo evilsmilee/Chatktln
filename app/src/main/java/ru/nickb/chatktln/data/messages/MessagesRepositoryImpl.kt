@@ -22,8 +22,8 @@ class MessagesRepositoryImpl @Inject constructor(
                         if (message.senderId == account.id) {
                             message.fromMe = true
                         }
-                        messagesCache.saveMessage(message)
                     }
+                    messagesCache.saveMessages(it)
                 }
             } else {
                 Either.Right(messagesCache.getChats())
@@ -50,11 +50,10 @@ class MessagesRepositoryImpl @Inject constructor(
                         }
 
                         val contact =
-                            messagesCache.getChats().first { it.contact?.id == contactId }.contact
+                            messagesCache.getChats().firstOrNull { it.contact?.id == contactId }?.contact
                         message.contact = contact
-
-                        messagesCache.saveMessage(message)
                     }
+                    messagesCache.saveMessages(it)
                 }
             } else {
                 Either.Right(messagesCache.getMessagesWithContact(contactId))
