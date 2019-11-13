@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.dialog_image.view.*
 import ru.nickb.chatktln.R
 import ru.nickb.chatktln.domain.friends.FriendEntity
 import ru.nickb.chatktln.presentation.Authenticator
@@ -147,7 +148,7 @@ class Navigator @Inject constructor(private val authenticator: Authenticator, pr
             null
         )
 
-        val dialog = Dialog(context, R.style.DialogFullScreen)
+        val dialog = Dialog(context, R.style.DialogFullscreen)
 
         view.imageView.setImageDrawable(image)
         dialog.setContentView(view)

@@ -53,12 +53,11 @@ interface  AppComponent {
     //fragments
     fun inject(fragment: RegisterFragment)
     fun inject(fragment: LoginFragment)
-    fun inject(fragment: ChatsFragment)
     fun inject(fragment: FriendsFragment)
     fun inject(fragment: FriendRequestsFragment)
     fun inject(fragment: AccountFragment)
     fun inject(fragment: MessagesFragment)
-    fun inject(fragment: ChatFragment)
+    fun inject(fragment: ChatsFragment)
     fun inject(fragment: UserFragment)
 
     //services

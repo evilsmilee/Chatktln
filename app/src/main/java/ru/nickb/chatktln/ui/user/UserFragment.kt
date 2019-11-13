@@ -3,7 +3,6 @@ package ru.nickb.chatktln.ui.user
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_user.*
-import kotlinx.android.synthetic.main.item_friend.*
 import kotlinx.android.synthetic.main.item_friend.imgPhoto
 import kotlinx.android.synthetic.main.item_friend.tvName
 import kotlinx.android.synthetic.main.item_friend.tvStatus
@@ -27,6 +26,8 @@ class UserFragment: BaseFragment() {
                 val email = args.getString(ApiService.PARAM_EMAIL)
                 val status = args.getString(ApiService.PARAM_STATUS)
 
+                val id = args.getLong(ApiService.PARAM_CONTACT_ID)
+
                 GlideHelper.loadImage(requireContext(), image, imgPhoto, R.drawable.ic_account_circle)
 
                 tvName.text = name
@@ -36,6 +37,14 @@ class UserFragment: BaseFragment() {
                 if (tvStatus.text.isEmpty()) {
                     tvStatus.visibility = View.GONE
                     tvHintStatus.visibility = View.GONE
+                }
+
+               imgPhoto.setOnClickListener {
+                    navigator.showImageDialog(requireContext(), imgPhoto.drawable)
+                }
+
+                btnSendMessage.setOnClickListener {
+                    navigator.showChatWithContact(id, name, requireContext())
                 }
             }
         }
