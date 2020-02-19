@@ -139,6 +139,7 @@
                 </LinearLayout>
             </RelativeLayout>
 
+
             <RelativeLayout
                 android:id="@+id/btnFriends"
                 android:layout_width="match_parent"

@@ -74,7 +74,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:visibility="@{friend.status.empty ? View.GONE : View.VISIBLE}"

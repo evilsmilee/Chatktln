@@ -46,6 +46,9 @@ class NotificationHelper @Inject constructor(val context: Context, val getMessag
 
     private fun createChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
             // create android channel
             val androidChannel = NotificationChannel(
                 context.packageName,
@@ -59,6 +62,8 @@ class NotificationHelper @Inject constructor(val context: Context, val getMessag
             androidChannel.lightColor = Color.GREEN
             // Sets whether notifications posted to this channel appear on the lockscreen or not
             androidChannel.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+
+
 
             mManager.createNotificationChannel(androidChannel)
         }

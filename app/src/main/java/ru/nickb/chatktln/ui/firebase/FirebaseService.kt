@@ -25,7 +25,6 @@ class FirebaseService: FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         Handler(Looper.getMainLooper()).post {
             notificationHelper.sendNotification(remoteMessage)
-
         }
     }
 

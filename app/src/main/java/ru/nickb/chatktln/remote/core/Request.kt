@@ -23,7 +23,7 @@ class Request @Inject constructor(private val networkHandler: NetworkHandler) {
             val response = call.execute()
             when (response.isSucceed()) {
                 true -> Either.Right(transform((response.body()!!)))
-                false -> Either.Left(Failure.ServerError)
+                false -> Either.Left(response.parseError())
             }
         } catch (exception: Throwable) {
             Either.Left(Failure.ServerError)

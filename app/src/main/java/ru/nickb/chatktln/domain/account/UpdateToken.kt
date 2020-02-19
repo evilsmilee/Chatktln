@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class UpdateToken @Inject constructor(private val accountRepository: AccountRepository): UseCase<None, UpdateToken.Params>() {
 
-    override suspend fun run(params: UpdateToken.Params): Either<Failure, None> = accountRepository.updateAccountToken(params.token)
+    override suspend fun run(params: Params): Either<Failure, None> = accountRepository.updateAccountToken(params.token)
 
     data class Params(val token: String)
 

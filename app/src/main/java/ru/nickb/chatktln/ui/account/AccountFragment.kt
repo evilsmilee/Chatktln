@@ -19,6 +19,7 @@ import ru.nickb.chatktln.ui.core.ext.onFailure
 import ru.nickb.chatktln.ui.core.ext.onSuccess
 
 class AccountFragment : BaseFragment() {
+
     override val layoutId: Int = R.layout.fragment_account
 
     override val titleToolbar = R.string.screen_account
@@ -133,7 +134,6 @@ class AccountFragment : BaseFragment() {
         return allValid
     }
 
-
     private fun handleAccount(account: AccountEntity?) {
         hideProgress()
         accountEntity = account
@@ -169,7 +169,6 @@ class AccountFragment : BaseFragment() {
                 .into(imgPhoto)
         }
     }
-
 
     private fun handleEditingAccount(account: AccountEntity?) {
         showMessage(getString(R.string.success_edit_user))

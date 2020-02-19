@@ -36,6 +36,7 @@ class MessagesRepositoryImpl @Inject constructor(
             }
     }
 
+
     override fun getMessagesWithContact(
         contactId: Long,
         needFetch: Boolean

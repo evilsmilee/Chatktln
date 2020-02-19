@@ -13,6 +13,7 @@ interface AccountRepository {
     fun getCurrentAccount(): Either<Failure, AccountEntity>
 
     fun updateAccountToken(token: String): Either<Failure, None>
+
     fun updateAccountLastSeen(): Either<Failure, None>
 
     fun editAccount(entity: AccountEntity): Either<Failure, AccountEntity>

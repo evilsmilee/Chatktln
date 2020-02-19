@@ -132,7 +132,6 @@ class Navigator @Inject constructor(private val authenticator: Authenticator, pr
     fun showDeleteMessageDialog(context: Context, onPositive: () -> Unit) {
         AlertDialog.Builder(context)
             .setMessage(context.getString(R.string.remove_message))
-
             .setPositiveButton(android.R.string.yes) {dialog, which ->
                 onPositive()
                 dialog.dismiss()

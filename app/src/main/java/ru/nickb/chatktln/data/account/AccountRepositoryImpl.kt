@@ -1,5 +1,6 @@
 package ru.nickb.chatktln.data.account
 
+import android.util.Log
 import ru.nickb.chatktln.domain.account.AccountEntity
 import ru.nickb.chatktln.domain.account.AccountRepository
 import ru.nickb.chatktln.domain.type.*
@@ -13,6 +14,7 @@ class AccountRepositoryImpl(private val accountRemote: AccountRemote, private va
             accountRemote.login(email, password, it)
         }.onNext {
             it.password = password
+            Log.i("AccountEntity", it.name)
             accountCache.saveAccount(it)
         }
     }
