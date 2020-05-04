@@ -12,13 +12,15 @@ class AccountViewModel @Inject constructor(
     val getAccountUseCase: GetAccount,
     val logoutUseCase: Logout,
     val editAccountUseCase: EditAccount,
-    val updateLastSeenUseCase: UpdateLastSeen
+    val updateLastSeenUseCase: UpdateLastSeen,
+    val forgetPasswordUseCase: ForgetPassword
 ): BaseViewModel() {
 
     var registerData: MutableLiveData<None> = MutableLiveData()
     var accountData: MutableLiveData<AccountEntity> = MutableLiveData()
     var editAccountData: MutableLiveData<AccountEntity> = MutableLiveData()
     var logoutData: MutableLiveData<None> = MutableLiveData()
+    var forgetPasswordData: MutableLiveData<None> = MutableLiveData()
 
     fun register(email: String, name: String, password: String) {
         registerUseCase(Register.Params(email, name, password)) {
@@ -48,6 +50,11 @@ class AccountViewModel @Inject constructor(
         updateLastSeenUseCase(None()) {it.either(::handleFailure) {} }
     }
 
+    fun forgetPassword(email: String) {
+        forgetPasswordUseCase(ForgetPassword.Params(email))
+        {it.either(::handleFailure, ::handleForgetPassword)}
+    }
+
     private fun handleRegister(none: None) {
         this.registerData.value = none
     }
@@ -64,6 +71,10 @@ class AccountViewModel @Inject constructor(
         this.logoutData.value = none
     }
 
+    private fun handleForgetPassword(none: None) {
+        this.forgetPasswordData.value = none
+    }
+
     override fun onCleared() {
         super.onCleared()
         registerUseCase.unsubscribe()
@@ -71,5 +82,6 @@ class AccountViewModel @Inject constructor(
         getAccountUseCase.unsubscribe()
         logoutUseCase.unsubscribe()
         updateLastSeenUseCase.unsubscribe()
+        forgetPasswordUseCase.unsubscribe()
     }
 }

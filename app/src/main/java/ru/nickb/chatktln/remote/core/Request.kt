@@ -45,6 +45,8 @@ class Request @Inject constructor(private val networkHandler: NetworkHandler) {
             "already found in your friend requests",
             "you requested adding this friend before" -> Failure.AlreadyRequestedFriendError
             "No Contact has this email" -> Failure.ContactNotFoundError
+            "Email not register" -> Failure.EmailNotRegisteredError
+            "Can`t send email" -> Failure.CantSendEmailError
             else -> Failure.ServerError
         }
     }

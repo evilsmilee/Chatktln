@@ -62,6 +62,8 @@ interface ApiService {
         const val PARAM_MESSAGES_IDS = "messages_ids"
 
         const val PARAM_LAST_SEEN = "last_seen"
+
+        const val FORGET_PASSWORD = "forget_password"
     }
 
     @FormUrlEncoded
@@ -123,4 +125,8 @@ interface ApiService {
     @FormUrlEncoded
     @POST(UPDATE_USER_LAST_SEEN)
     fun updateUserLastSeen(@FieldMap params: Map<String, String>): Call<BaseResponse>
+
+    @FormUrlEncoded
+    @POST(FORGET_PASSWORD)
+    fun forgetPassword(@FieldMap params: Map<String, String>): Call<BaseResponse>
 }

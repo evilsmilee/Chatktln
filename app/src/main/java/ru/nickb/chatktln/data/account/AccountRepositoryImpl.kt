@@ -30,7 +30,7 @@ class AccountRepositoryImpl(private val accountRemote: AccountRemote, private va
     }
 
     override fun forgetPassword(email: String): Either<Failure, None> {
-        throw UnsupportedOperationException("Password recovery is not supported")
+       return accountRemote.forgetPassword(email)
     }
 
     override fun getCurrentAccount(): Either<Failure, AccountEntity> {
@@ -62,5 +62,7 @@ class AccountRepositoryImpl(private val accountRemote: AccountRemote, private va
     override fun checkAuth(): Either<Failure, Boolean> {
         return accountCache.checkAuth()
     }
+
+
 
 }

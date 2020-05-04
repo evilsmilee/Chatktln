@@ -41,6 +41,10 @@ class LoginFragment: BaseFragment() {
         btnRegister.setOnClickListener {
             activity?.let { navigator.showSignUp(it) }
         }
+
+        btnForgetPassword.setOnClickListener {
+            activity?.let { navigator.showForgedPassword(it) }
+        }
     }
 
     private fun validateFields() {

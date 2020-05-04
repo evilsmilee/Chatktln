@@ -20,6 +20,7 @@ import ru.nickb.chatktln.ui.account.AccountActivity
 import ru.nickb.chatktln.ui.core.PermissionManager
 import ru.nickb.chatktln.ui.home.HomeActivity
 import ru.nickb.chatktln.ui.home.MessagesActivity
+import ru.nickb.chatktln.ui.login.ForgetPasswordActivity
 import ru.nickb.chatktln.ui.login.LoginActivity
 import ru.nickb.chatktln.ui.register.RegisterActivity
 import ru.nickb.chatktln.ui.user.UserActivity
@@ -39,6 +40,8 @@ class Navigator @Inject constructor(private val authenticator: Authenticator, pr
     fun showSignUp(context: Context) = context.startActivity<RegisterActivity>()
 
     fun showHome(context: Context, newTask: Boolean = true) = context.startActivity<HomeActivity>(newTask = newTask)
+
+    fun showForgedPassword(context: Context) = context.startActivity<ForgetPasswordActivity>()
 
     fun showEmailNotFoundDialog(context: Context, email: String) {
         AlertDialog.Builder(context)

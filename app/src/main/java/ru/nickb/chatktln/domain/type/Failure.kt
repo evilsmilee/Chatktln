@@ -18,4 +18,7 @@ sealed class Failure {
     object ContactNotFoundError: Failure()
 
     object FilePickError: Failure()
+
+    object EmailNotRegisteredError: Failure()
+    object CantSendEmailError: Failure()
 }
