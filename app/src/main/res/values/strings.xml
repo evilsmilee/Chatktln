@@ -65,7 +65,7 @@
 
     <string name="friend_request">Запрос в друзья</string>
     <string name="friend_request_approved">Запрос в друзья подтвержден</string>
-    <string name="friend_request_cancelled">Запрос в друзья отменен</string>
+    <string name="friend_request_cancelled">Запрос в друзья отклонён</string>
 
     <string name="pick">Выберите фото</string>
     <string name="camera">Камера</string>
